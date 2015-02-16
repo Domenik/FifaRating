@@ -1,0 +1,181 @@
+﻿<controls:MetroWindow x:Class="FifaRating.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+
+                      Closed="MainWindow_OnClosed"
+                      
+        Title="Рейтинг FIFA" 
+        Height="500" Width="800"              
+        Icon="Src/IconsFifa.png"
+        EnableDWMDropShadow="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowTransitionsEnabled="False"
+        WindowStartupLocation="CenterScreen">
+
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Command="{Binding AddNewMatchCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20"
+                              Source="Src/addMatch.png">
+                    </Image>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Новый матч"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding AddNewTournamentCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20"
+                              Source="Src/addTournament.png">
+                    </Image>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Новый турнир"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding AddNewUserCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20"
+                              Source="Src/addUser.png">
+                    </Image>
+                    <TextBlock Margin="4 0 0 0"
+                               VerticalAlignment="Center"
+                               Text="Новый игрок"/>
+                </StackPanel>
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <TabControl>
+        <TabItem Header="Главная">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Border BorderBrush="Black" BorderThickness="1">
+                        <Image Source="Src/NoAvatar.png" Width="250" Height="250" DockPanel.Dock="Left"/>
+                    </Border>
+                    <ComboBox ItemsSource="{Binding ListOfUsers}" Text="Кто"
+                          SelectedItem="{Binding User}" DockPanel.Dock="Top"/>
+                    <ComboBox ItemsSource="{Binding ListOfUsers}"
+                          SelectedItem="{Binding RivalUser}" DockPanel.Dock="Top"/>
+                    <ComboBox ItemsSource="{Binding ListOfClubs}"
+                          SelectedItem="{Binding MyClub}" DockPanel.Dock="Top"/>
+                    <ComboBox ItemsSource="{Binding ListOfClubs}"
+                          SelectedItem="{Binding RivalClub}" DockPanel.Dock="Top"/>
+                    <Button Content="Refresh" DockPanel.Dock="Top" Command="{Binding RefreshCommand}"/>
+                    
+                    <StackPanel></StackPanel>
+                </DockPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Игр:"/>
+                        <TextBlock Text="{Binding User.CountOfGames}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Выйграл:"/>
+                        <TextBlock Text="{Binding User.CountOfWin}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Проиграл:"/>
+                        <TextBlock Text="{Binding User.CountOfLost}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Ничьих:"/>
+                        <TextBlock Text="{Binding User.CountOfDraw}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Голов забито:"/>
+                        <TextBlock Text="{Binding User.CountOfGoals}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Пропушено мячей:"/>
+                        <TextBlock Text="{Binding User.CountOfMissingBalls}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                        <TextBlock Text="Сухих игр:"/>
+                        <TextBlock Text="{Binding User.CountOfClearVictory}"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="Бомбардиры">
+            <DataGrid ItemsSource="{Binding ListOfBestPlayers}" Margin="10,20,10,0"
+                      AutoGenerateColumns="False"
+                      Style="{StaticResource AzureDataGrid}">
+                <DataGrid.Resources>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Игрок" 
+                                        Width="200">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Клуб" 
+                                        Width="200">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Голы"
+                                        Width="0.2*">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Дубли"
+                                        Width="0.2*">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Хэт трики"
+                                        Width="0.2*">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Покеры"
+                                        Width="0.2*">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="5 и более"
+                                        Width="0.2*">
+
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </TabItem>
+        <TabItem Header="Матчи">
+            <TextBlock Text="Здесь будет список матчей"></TextBlock>
+        </TabItem>
+        <TabItem Header="Клубы">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <DataGrid ItemsSource="{Binding ListOfClubs}"
+                          SelectedItem="{Binding SelectedClub}"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" 
+                                            Width="*"
+                                            Header="Клуб"/>
+                    </DataGrid.Columns>
+
+
+                </DataGrid>
+
+                <DataGrid ItemsSource="{Binding SelectedClub.ListOfPlayers}"
+                          AutoGenerateColumns="False"                          
+                          Grid.Column="1">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" 
+                                            Width="*"
+                                            Header="Игроки"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Турниры">
+
+        </TabItem>
+    </TabControl>
+
+</controls:MetroWindow>

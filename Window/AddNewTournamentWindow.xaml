@@ -1,0 +1,18 @@
+﻿<Window x:Class="FifaRating.AddNewTournamentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddNewTournamentWindow" Height="600" Width="600">
+    <DockPanel>
+        <TextBox DockPanel.Dock="Top" Text="{Binding Name}" Margin="30,10,30,10"/>
+        <DockPanel>
+            
+            <DataGrid DockPanel.Dock="Left" AutoGenerateColumns="False" Width="400">
+                <DataGrid.Columns>
+                    <DataGridComboBoxColumn Width="200"></DataGridComboBoxColumn>
+                    <DataGridComboBoxColumn Width="*"></DataGridComboBoxColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel></StackPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>
